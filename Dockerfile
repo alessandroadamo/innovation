@@ -45,8 +45,10 @@ RUN update-alternatives --install /usr/bin/javac javac /opt/jdk/jdk1.8.0_131/bin
 RUN rm /tmp/jdk-8u131-linux-x64.tar.gz
 
 # install Spark
-ADD https://d3kbcqa49mib13.cloudfront.net/spark-2.1.1-bin-hadoop2.7.tgz /opt/ 
-RUN ln -s /opt/spark-2.1.1-bin-hadoop2.7 /opt/spark
+# ADD https://d3kbcqa49mib13.cloudfront.net/spark-2.1.1-bin-hadoop2.7.tgz /opt/ 
+# RUN ln -s /opt/spark-2.1.1-bin-hadoop2.7 /opt/spark
+ADD https://d3kbcqa49mib13.cloudfront.net/spark-2.1.0-bin-hadoop2.7.tgz /opt/ 
+RUN ln -s /opt/spark-2.1.0-bin-hadoop2.7 /opt/spark
 ENV SPARK_HOME /opt/spark
 ENV PATH ${SPARK_HOME}/sbin:${SPARK_HOME}/bin:${PATH}
 ENV PYTHONPATH ${SPARK_HOME}/python/:${PYTHONPATH}
