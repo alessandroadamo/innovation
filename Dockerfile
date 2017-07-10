@@ -1,6 +1,6 @@
 FROM continuumio/anaconda3
 
-MAINTAINER Alessandro Adamo <alessandro.adamo@vodafone.com>
+MAINTAINER Alessandro Adamo <alessandro.adamo@gmail.com>
 
 USER root
 
