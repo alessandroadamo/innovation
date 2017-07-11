@@ -86,9 +86,10 @@ RUN /opt/conda/bin/conda install -c anaconda -y \
 	# tensorflow-gpu=1.1.0 \
 	keras=2.0.2 \
 	pyodbc=4.0.17 \
-	cx_oracle=5.2 \
+	# cx_oracle \
 	&& conda clean -yat
 
+RUN conda install -c mgckind cx_oracle=5.3
 # Install Python 3
 #RUN conda create -n python3 python=3.6 \
 #	ipykernel \
