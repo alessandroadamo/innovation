@@ -13,6 +13,7 @@ RUN apt-get install -y \
 	gfortran \
 	build-essential \
 	locales \
+	unixodbc \
 	fonts-dejavu
 
 ENV LC_ALL en_US.UTF-8
@@ -85,6 +86,7 @@ RUN /opt/conda/bin/conda install -c anaconda -y \
 	# tensorflow-gpu=1.1.0 \
 	keras=2.0.2 \
 	pyodbc=4.0.17 \
+	cx_oracle=5.2 \
 	&& conda clean -yat
 
 # Install Python 3
