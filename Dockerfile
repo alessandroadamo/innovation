@@ -14,6 +14,9 @@ RUN apt-get install -y \
 	build-essential \
 	locales \
 	unixodbc \
+	libaio1 \
+	bc \
+	flex \
 	fonts-dejavu
 
 ENV LC_ALL en_US.UTF-8
