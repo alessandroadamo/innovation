@@ -15,6 +15,7 @@ RUN apt-get install -y \
 	locales \
 	unixodbc \
 	libaio1 \
+	libicu-dev \
 	bc \
 	flex \
 	fonts-dejavu
