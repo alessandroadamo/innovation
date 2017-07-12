@@ -84,42 +84,23 @@ RUN /opt/conda/bin/conda install -c anaconda -y \
 	scikit-learn=0.18.1 \
 	seaborn=0.7.1 \
 	sympy=1.0 \
+	pysal=1.13.0 \
 	tensorflow=1.1.0 \
-	pyodbc=4.0.17 \
 	# tensorflow-gpu=1.1.0 \
+	pyodbc=4.0.17 \
 	keras=2.0.2 \
 	pyodbc=4.0.17 \
-	# cx_oracle \
 	&& conda clean -yat
 
 RUN conda install -c mgckind cx_oracle=5.3
-# Install Python 3
-#RUN conda create -n python3 python=3.6 \
-#	ipykernel \
-#	ipywidgets \
-#	pandas \
-#	numpy \
-#	scipy \
-#	pillow \
-#	matplotlib \
-#	tensorflow \
-#	keras \
-#	gensim \
-#	nltk \
-#	seaborn \ 
-#	scikit-learn \
-#	plotly \
-#	cython \ 
-#	statsmodels \ 
-#	numba \ 
-#	bokeh \ 
-#	pyodbc \
-#	&& conda clean -yat
 
 RUN conda install -c conda-forge -y \
 	polyline=1.3.2 \
 	geopy=1.11.0 \
-	geopandas=0.2.1
+	geopandas=0.2.1 \
+	rtree=0.8.3 \
+	descartes=1.1.0
+	
 # RUN conda install -n python3 -c conda-forge geopy 
 # RUN conda install -n python3 -c mlgill gmplot
 
