@@ -15,7 +15,6 @@ RUN apt-get install -y \
 	locales \
 	unixodbc \
 	libaio1 \
-	libicu-dev \
 	bc \
 	flex \
 	fonts-dejavu
@@ -63,74 +62,69 @@ ENV PYSPARK_DRIVER_PYTHON="jupyter"
 ENV PYSPARK_DRIVER_PYTHON_OPTS="notebook"
 
 # install packages anaconda
-RUN /opt/conda/bin/conda install -c anaconda -y \
-	numpy=1.11.3 \
-	scipy=0.19.0 \
-	pandas=0.20.1 \
-	pandas-datareader=0.2.1 \
-	pytables=3.3.0 \
-	matplotlib=2.0.2 \
-	bokeh=0.12.5 \
-	plotly=1.12.9 \
-	curl=7.52.1 \
-	blaze=0.10.1 \
-	numba=0.33.0 \
-	proj4=4.9.2 \
-	iso8601=0.1.11 \
-	memory_profiler=0.43 \
-	line_profiler=2.0 \
-	psutil=5.2.2 \
-	nltk=3.2.3 \
-	pcre=8.39 \
-	scikit-learn=0.18.1 \
-	seaborn=0.7.1 \
-	sympy=1.0 \
-	pysal=1.13.0 \
-	tensorflow=1.1.0 \
-	# tensorflow-gpu=1.1.0 \
-	pyodbc=4.0.17 \
-	keras=2.0.2 \
-	pyodbc=4.0.17 \
+RUN /opt/conda/bin/conda install -c conda-forge -y \
+	numpy \
+	scipy \
+	pandas \
+	pandas-datareader \
+	geopandas\
+ 	polyline \
+	geopy \
+	rtree \
+	descartes \
+	pytables \
+	matplotlib \
+	bokeh \
+	plotly \
+	curl \
+	# blaze=0.10.1 \
+	# numba=0.33.0 \
+	# proj4=4.9.2 \
+	iso8601 \
+	memory_profiler \
+	line_profiler \
+	psutil \
+	nltk \
+	pcre \
+	scikit-learn \
+	seaborn  \
+	sympy \
+	pysal \
+	tensorflow \
+	# pyodbc=4.0.17 \
+	keras  \
 	&& conda clean -yat
 
 RUN conda install -c mgckind cx_oracle=5.3
 
-RUN conda install -c conda-forge -y \
-	polyline=1.3.2 \
-	geopy=1.11.0 \
-	geopandas=0.2.1 \
-	rtree=0.8.3 \
-	descartes=1.1.0
-	
-# RUN conda install -n python3 -c conda-forge geopy 
-# RUN conda install -n python3 -c mlgill gmplot
-
 # R packages including IRKernel which gets installed globally.
-RUN conda config --add channels r 
-RUN conda install \
-	rpy2=2.8.5 \
-	r-base=3.3.2 \
-	r-essentials=1.5.2 \
-	r-spatial=7.3.8 \
-	r-irkernel=0.7.1 \
-	r-plyr=1.8.4 \
-	r-devtools=1.12.0 \
-	r-tidyverse=1.0.0 \
-	r-shiny=0.14.2 \
-	r-rmarkdown=1.3 \
-	r-forecast=7.3 \
-	r-reshape2=1.4.2 \
-	r-caret=6.0_73 \
-	r-curl=2.3 \
-	r-ggplot2=2.2.0 \
-	r-crayon=1.3.2 \
-	r-randomforest=4.6_12 \
-	r-rodbc=1.3_14 \
-	r-sparklyr=0.5.1 \
+# RUN conda config --add channels r 
+RUN conda install -c conda-forge -y \
+ 	rpy2 \
+	r-base \
+ 	r-essentials \
+	r-spatial \
+	r-irkernel \
+	r-plyr \
+	r-devtools \
+	r-tidyverse \
+	r-shiny \
+	r-rmarkdown \
+	r-forecast \
+	r-reshape2 \
+	r-caret \
+	r-curl \
+	r-ggplot2 \
+	r-ggmap \
+	r-rjson \
+	r-crayon \
+	r-randomforest \
+	r-rodbc \
+	r-sparklyr \
+	r-rgooglemaps \
 	&& conda clean -tipsy
 
-RUN conda install -c conda-forge \
-	r-rgooglemaps=1.4.1
+RUN conda install -c mgckind cx_oracle=5.3
 
 RUN /bin/bash -c ""
 
