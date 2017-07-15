@@ -76,6 +76,8 @@ RUN /opt/conda/bin/conda install -c conda-forge -y \
 	matplotlib \
 	bokeh \
 	plotly \
+	shapely \
+	basemap \
 	curl \
 	# blaze=0.10.1 \
 	# numba=0.33.0 \
