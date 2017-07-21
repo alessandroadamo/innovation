@@ -83,6 +83,7 @@ RUN /opt/conda/bin/conda install -c conda-forge -y \
 	# numba=0.33.0 \
 	# proj4=4.9.2 \
 	iso8601 \
+	urllib3 \
 	memory_profiler \
 	line_profiler \
 	psutil \
