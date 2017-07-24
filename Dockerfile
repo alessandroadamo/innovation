@@ -95,7 +95,8 @@ RUN /opt/conda/bin/conda install -c conda-forge -y \
 	pysal \
 	tensorflow \
 	# pyodbc=4.0.17 \
-	keras  \
+	keras \
+	hdf5 \
 	&& conda clean -yat
 
 RUN conda install -c mgckind cx_oracle=5.3
