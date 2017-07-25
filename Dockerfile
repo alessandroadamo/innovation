@@ -63,6 +63,7 @@ ENV PYSPARK_DRIVER_PYTHON_OPTS="notebook"
 
 # install packages anaconda
 RUN /opt/conda/bin/conda install -c conda-forge -y \
+	pip \
 	numpy \
 	scipy \
 	pandas \
@@ -97,6 +98,7 @@ RUN /opt/conda/bin/conda install -c conda-forge -y \
 	# pyodbc=4.0.17 \
 	keras \
 	hdf5 \
+	google-api-python-client \
 	&& conda clean -yat
 
 RUN conda install -c mgckind cx_oracle=5.3
@@ -140,4 +142,4 @@ WORKDIR /home/innovation
 
 EXPOSE 8888
 
-ENTRYPOINT ["/opt/conda/bin/jupyter", "notebook", "--port=8888", "--no-browser", "--ip=0.0.0.0", "--NotebookApp.token=''", "--NotebookApp.base_url='/'", "--NotebookApp.notebook_dir='/home/innovation/notebooks'"]
+# ENTRYPOINT ["/opt/conda/bin/jupyter", "notebook", "--port=8888", "--no-browser", "--ip=0.0.0.0", "--NotebookApp.token=''", "--NotebookApp.base_url='/'", "--NotebookApp.notebook_dir='/home/innovation/notebooks'"]
