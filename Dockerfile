@@ -130,6 +130,8 @@ RUN conda install -c conda-forge -y \
 
 RUN conda install -c mgckind cx_oracle=5.3
 
+RUN cp -p /lib/x86_64/libreadline.so.6 /opt/conda/lib/libreadline.so.6
+
 RUN /bin/bash -c ""
 
 USER innovation
@@ -138,4 +140,4 @@ WORKDIR /home/innovation
 
 EXPOSE 8888
 
-ENTRYPOINT ["/opt/conda/bin/jupyter", "notebook", "--port=8888", "--no-browser", "--ip=0.0.0.0", "--NotebookApp.token=''", "--NotebookApp.base_url='/'", "--NotebookApp.notebook_dir='/home/innovation/notebooks'"]
+# ENTRYPOINT ["/opt/conda/bin/jupyter", "notebook", "--port=8888", "--no-browser", "--ip=0.0.0.0", "--NotebookApp.token=''", "--NotebookApp.base_url='/'", "--NotebookApp.notebook_dir='/home/innovation/notebooks'"]
