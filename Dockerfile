@@ -17,11 +17,15 @@ RUN apt-get install -y \
 	libaio1 \
 	bc \
 	flex \
-	fonts-dejavu
+	fonts-dejavu \
+	supervisor
 
 ENV LC_ALL en_US.UTF-8
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US.UTF-8
+
+# supervisor for multi entry points
+ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
 RUN locale-gen
@@ -136,10 +140,13 @@ RUN cp -p /lib/x86_64-linux-gnu/libreadline.so.6 /opt/conda/lib/libreadline.so.6
 
 RUN /bin/bash -c ""
 
+RUN chown -Rf innovation /var/log/supervisor/
 USER innovation
-RUN mkdir /home/innovation/notebooks
+RUN mkdir -p /home/innovation/notebooks
+RUN mkdir -p /home/innovation/logs
 WORKDIR /home/innovation
 
 EXPOSE 8888
+EXPOSE 6006
 
-ENTRYPOINT ["/opt/conda/bin/jupyter", "notebook", "--port=8888", "--no-browser", "--ip=0.0.0.0", "--NotebookApp.token=''", "--NotebookApp.base_url='/'", "--NotebookApp.notebook_dir='/home/innovation/notebooks'"]
+ENTRYPOINT ["/usr/bin/supervisord", "--conf=/etc/supervisor/conf.d/supervisord.conf"]
