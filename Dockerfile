@@ -53,8 +53,6 @@ RUN update-alternatives --install /usr/bin/javac javac /opt/jdk/jdk1.8.0_131/bin
 RUN rm /tmp/jdk-8u131-linux-x64.tar.gz
 
 # install Spark
-# ADD https://d3kbcqa49mib13.cloudfront.net/spark-2.1.1-bin-hadoop2.7.tgz /opt/ 
-# RUN ln -s /opt/spark-2.1.1-bin-hadoop2.7 /opt/spark
 ADD https://d3kbcqa49mib13.cloudfront.net/spark-2.1.0-bin-hadoop2.7.tgz /opt/ 
 RUN ln -s /opt/spark-2.1.0-bin-hadoop2.7 /opt/spark
 ENV SPARK_HOME /opt/spark
@@ -93,6 +91,7 @@ RUN /opt/conda/bin/conda install -c conda-forge -y \
 	line_profiler \
 	psutil \
 	nltk \
+	gensim \
 	pcre \
 	scikit-learn \
 	seaborn  \
@@ -108,7 +107,6 @@ RUN /opt/conda/bin/conda install -c conda-forge -y \
 RUN conda install -c mgckind cx_oracle=5.3
 
 # R packages including IRKernel which gets installed globally.
-# RUN conda config --add channels r 
 RUN conda install -c conda-forge -y \
  	rpy2 \
 	r-base \
