@@ -143,7 +143,7 @@ RUN /bin/bash -c ""
 RUN chown -Rf innovation /var/log/supervisor/
 USER innovation
 RUN mkdir -p /home/innovation/notebooks
-RUN mkdir -p /home/innovation/logs
+RUN mkdir -p /home/innovation/notebooks/tf_logs
 WORKDIR /home/innovation
 
 EXPOSE 8888
