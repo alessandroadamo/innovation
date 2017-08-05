@@ -144,6 +144,9 @@ RUN mkdir -p /home/innovation/notebooks
 RUN mkdir -p /home/innovation/notebooks/tf_logs
 WORKDIR /home/innovation
 
+# install NLTK download
+RUN /opt/conda/bin/python3 -m nltk.downloader all
+
 EXPOSE 8888
 EXPOSE 6006
 
