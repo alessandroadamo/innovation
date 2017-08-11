@@ -102,6 +102,8 @@ RUN /opt/conda/bin/conda install -c conda-forge -y \
 	keras \
 	hdf5 \
 	google-api-python-client \
+	networkx \
+	nxviz \
 	&& conda clean -yat
 
 RUN conda install -c mgckind cx_oracle=5.3
