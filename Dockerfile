@@ -104,9 +104,16 @@ RUN /opt/conda/bin/conda install -c conda-forge -y \
 	google-api-python-client \
 	networkx \
 	nxviz \
+	geographiclib \
 	&& conda clean -yat
 
 RUN conda install -c mgckind cx_oracle=5.3
+RUN conda install -c glemaitre imbalanced-learn
+
+RUN /opt/conda/bin/pip install \
+	gmplot \
+	geographiclib
+# RUN /opt/conda/bin/pip install -i https://pypi.anaconda.org/pypi/simple googlemaps 
 
 # R packages including IRKernel which gets installed globally.
 RUN conda install -c conda-forge -y \
