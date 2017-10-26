@@ -82,9 +82,6 @@ RUN /opt/conda/bin/conda install -c conda-forge -y \
 	shapely \
 	basemap \
 	curl \
-	# blaze=0.10.1 \
-	# numba=0.33.0 \
-	# proj4=4.9.2 \
 	iso8601 \
 	urllib3 \
 	memory_profiler \
@@ -98,7 +95,6 @@ RUN /opt/conda/bin/conda install -c conda-forge -y \
 	sympy \
 	pysal \
 	tensorflow \
-	# pyodbc=4.0.17 \
 	keras \
 	hdf5 \
 	google-api-python-client \
@@ -113,6 +109,10 @@ RUN conda install -c glemaitre imbalanced-learn
 RUN /opt/conda/bin/pip install \
 	gmplot \
 	geographiclib
+
+RUN /opt/conda/bin/pip install hug
+RUN /opt/conda/bin/pip install Flask
+
 # RUN /opt/conda/bin/pip install -i https://pypi.anaconda.org/pypi/simple googlemaps 
 
 # R packages including IRKernel which gets installed globally.
@@ -122,26 +122,17 @@ RUN conda install -c conda-forge -y \
  	r-essentials \
 	r-spatial \
 	r-irkernel \
-	r-plyr \
 	r-devtools \
 	r-tidyverse \
 	r-shiny \
 	r-rmarkdown \
-	r-forecast \
-	r-reshape2 \
-	r-caret \
-	r-curl \
-	r-ggplot2 \
-	r-ggmap \
-	r-rjson \
-	r-crayon \
-	r-randomforest \
-	r-rodbc \
-	r-sparklyr \
-	r-rgooglemaps \
 	&& conda clean -tipsy
 
 RUN conda install -c mgckind cx_oracle=5.3
+
+# install R packages
+ADD install.R /tmp/install.R
+RUN /opt/conda/bin/Rscript /tmp/install.R
 
 RUN cp -p /lib/x86_64-linux-gnu/libreadline.so.6 /opt/conda/lib/libreadline.so.6
 
@@ -150,13 +141,18 @@ RUN /bin/bash -c ""
 RUN chown -Rf innovation /var/log/supervisor/
 USER innovation
 RUN mkdir -p /home/innovation/notebooks
-RUN mkdir -p /home/innovation/notebooks/tf_logs
+RUN mkdir -p /home/innovation/tf_logs
 WORKDIR /home/innovation
 
 # install NLTK download
 RUN /opt/conda/bin/python3 -m nltk.downloader all
 
+# Jupyter
 EXPOSE 8888
+# TensorBoard
 EXPOSE 6006
+
+# Hug port range
+EXPOSE 8000-8050 
 
 ENTRYPOINT ["/usr/bin/supervisord", "--conf=/etc/supervisor/conf.d/supervisord.conf"]
