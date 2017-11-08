@@ -93,7 +93,7 @@ RUN /opt/conda/bin/conda install -c conda-forge -y \
 	gensim \
 	pcre \
 	scikit-learn \
-	tensorboard \
+	tensorflow \
 	seaborn \
 	sympy \
 	pysal \
