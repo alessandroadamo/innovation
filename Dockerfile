@@ -93,6 +93,7 @@ RUN /opt/conda/bin/conda install -c conda-forge -y \
 	gensim \
 	pcre \
 	scikit-learn \
+	tensorboard \
 	seaborn  \
 	sympy \
 	pysal \
@@ -105,6 +106,7 @@ RUN /opt/conda/bin/conda install -c conda-forge -y \
 	&& conda clean -yat
 
 # install Tensorflow
+# RUN /opt/conda/bin/pip install --upgrade tensorflow tensorflow-tensorboard
 RUN /opt/conda/bin/pip install --upgrade tensorflow tensorflow-tensorboard
 
 RUN conda install -c mgckind cx_oracle=5.3
