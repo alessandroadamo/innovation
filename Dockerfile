@@ -94,7 +94,7 @@ RUN /opt/conda/bin/conda install -c conda-forge -y \
 	pcre \
 	scikit-learn \
 	tensorboard \
-	seaborn  \
+	seaborn \
 	sympy \
 	pysal \
 	keras \
@@ -107,7 +107,7 @@ RUN /opt/conda/bin/conda install -c conda-forge -y \
 
 # install Tensorflow
 # RUN /opt/conda/bin/pip install --upgrade tensorflow tensorflow-tensorboard
-RUN /opt/conda/bin/pip install --upgrade tensorflow-tensorboard
+# RUN /opt/conda/bin/pip install --upgrade tensorflow-tensorboard
 
 RUN conda install -c mgckind cx_oracle=5.3
 RUN conda install -c glemaitre imbalanced-learn
