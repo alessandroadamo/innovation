@@ -18,7 +18,9 @@ RUN apt-get install -y \
 	bc \
 	flex \
 	fonts-dejavu \
-	supervisor
+	supervisor \
+	libgl1-mesa-dev \
+	libgl1-mesa-glx
 
 ENV LC_ALL en_US.UTF-8
 ENV LANG en_US.UTF-8
@@ -94,7 +96,6 @@ RUN /opt/conda/bin/conda install -c conda-forge -y \
 	seaborn  \
 	sympy \
 	pysal \
-	tensorflow \
 	keras \
 	hdf5 \
 	google-api-python-client \
@@ -102,6 +103,9 @@ RUN /opt/conda/bin/conda install -c conda-forge -y \
 	nxviz \
 	geographiclib \
 	&& conda clean -yat
+
+# install Tensorflow
+RUN /opt/conda/bin/pip install --upgrade tensorflow tensorflow-tensorboard
 
 RUN conda install -c mgckind cx_oracle=5.3
 RUN conda install -c glemaitre imbalanced-learn
@@ -130,11 +134,11 @@ RUN conda install -c conda-forge -y \
 
 RUN conda install -c mgckind cx_oracle=5.3
 
+RUN cp -p /lib/x86_64-linux-gnu/libreadline.so.6 /opt/conda/lib/libreadline.so.6
+
 # install R packages
 ADD install.R /tmp/install.R
 RUN /opt/conda/bin/Rscript /tmp/install.R
-
-RUN cp -p /lib/x86_64-linux-gnu/libreadline.so.6 /opt/conda/lib/libreadline.so.6
 
 RUN /bin/bash -c ""
 

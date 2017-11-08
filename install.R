@@ -27,3 +27,4 @@ install.packages("RgoogleMaps", repos="https://cloud.r-project.org")
 install.packages("dplyr", repos="https://cloud.r-project.org")
 install.packages("plyr", repos="https://cloud.r-project.org")
 install.packages("sparklyr", repos="https://cloud.r-project.org")
+
