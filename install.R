@@ -1,4 +1,3 @@
-install.packages("RODBC", repos="https://cloud.r-project.org")
 install.packages("ggplot2", repos="https://cloud.r-project.org")
 install.packages("ggmap", repos="https://cloud.r-project.org")
 install.packages("plyr", repos="https://cloud.r-project.org")
