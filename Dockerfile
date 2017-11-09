@@ -54,14 +54,14 @@ RUN update-alternatives --install /usr/bin/java java /opt/jdk/jdk1.8.0_131/bin/j
 RUN update-alternatives --install /usr/bin/javac javac /opt/jdk/jdk1.8.0_131/bin/javac 100
 RUN rm /tmp/jdk-8u131-linux-x64.tar.gz
 
-# install Spark
+# # install Spark
 ADD https://d3kbcqa49mib13.cloudfront.net/spark-2.1.0-bin-hadoop2.7.tgz /opt/ 
 RUN ln -s /opt/spark-2.1.0-bin-hadoop2.7 /opt/spark
 ENV SPARK_HOME /opt/spark
 ENV PATH ${SPARK_HOME}/sbin:${SPARK_HOME}/bin:${PATH}
 ENV PYTHONPATH ${SPARK_HOME}/python/:${PYTHONPATH}
 ENV PYTHONPATH ${SPARK_HOME}/python/lib/py4j-0.10.4-src.zip:${PYTHONPATH}
-
+ 
 ENV PYSPARK_DRIVER_PYTHON="jupyter"
 ENV PYSPARK_DRIVER_PYTHON_OPTS="notebook"
 
@@ -89,7 +89,7 @@ RUN /opt/conda/bin/conda install -c conda-forge -y \
 	memory_profiler \
 	line_profiler \
 	psutil \
-	nltk \
+#	nltk \
 	gensim \
 	pcre \
 	scikit-learn \
@@ -102,12 +102,15 @@ RUN /opt/conda/bin/conda install -c conda-forge -y \
 	google-api-python-client \
 	networkx \
 	nxviz \
-	geographiclib \
-	&& conda clean -yat
+	geographiclib
+RUN /opt/conda/bin/conda update dask
+RUN /opt/conda/bin/conda clean -yat
 
 # install Tensorflow
-# RUN /opt/conda/bin/pip install --upgrade tensorflow tensorflow-tensorboard
-# RUN /opt/conda/bin/pip install --upgrade tensorflow-tensorboard
+# RUN /opt/conda/bin/pip install --upgrade dask
+# RUN /opt/conda/bin/pip install --upgrade tensorflow
+# RUN /opt/conda/bin/pip install --upgrade tensorflow-tensorboard 
+# RUN /opt/conda/bin/pip install --upgrade tflearn
 
 RUN conda install -c mgckind cx_oracle=5.3
 RUN conda install -c glemaitre imbalanced-learn
@@ -121,11 +124,11 @@ RUN /opt/conda/bin/pip install Flask
 
 # RUN /opt/conda/bin/pip install -i https://pypi.anaconda.org/pypi/simple googlemaps 
 
-# R packages including IRKernel which gets installed globally.
+# # R packages including IRKernel which gets installed globally.
 RUN conda install -c conda-forge -y \
  	rpy2 \
 	r-base \
- 	r-essentials \
+	r-essentials \
 	r-spatial \
 	r-irkernel \
 	r-devtools \
@@ -138,7 +141,7 @@ RUN conda install -c mgckind cx_oracle=5.3
 
 RUN cp -p /lib/x86_64-linux-gnu/libreadline.so.6 /opt/conda/lib/libreadline.so.6
 
-# install R packages
+# # install R packages
 ADD install.R /tmp/install.R
 RUN /opt/conda/bin/Rscript /tmp/install.R
 
@@ -151,7 +154,7 @@ RUN mkdir -p /home/innovation/tf_logs
 WORKDIR /home/innovation
 
 # install NLTK download
-RUN /opt/conda/bin/python3 -m nltk.downloader all
+# RUN /opt/conda/bin/python3 -m nltk.downloader all
 
 # Jupyter
 EXPOSE 8888
@@ -162,3 +165,4 @@ EXPOSE 6006
 EXPOSE 8000-8050 
 
 ENTRYPOINT ["/usr/bin/supervisord", "--conf=/etc/supervisor/conf.d/supervisord.conf"]
+
